@@ -7,8 +7,12 @@ set -e
 # a bug in virtualbox shared folder filesystem.
 export VAGRANT_DONE_ACTION=destroy
 
+# Use tmpfs for the lxc containers, faster but requires more RAM (about 2 GB)
+export KEEP_DATA=""
 # Run checkbox tests, plainbox tests, integration tests and plainbox docs
-time -o timing.dat ./test-in-vagrant.sh
+time -o timing.dat ./test-in-lxc.sh
+# Vagrant testing can be done with this line
+# time -o timing.dat ./test-in-vagrant.sh
 echo "Complete checkbox, plainbox, integration and docs time:"
 cat timing.dat
 
